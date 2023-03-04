@@ -1,0 +1,166 @@
+{
+    "hints": {
+        "create()void": {
+            "call_config": {
+                "no_op": "CREATE"
+            }
+        },
+        "enterGame(pay,string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "tossPotato(string,address)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "grabPotato(string,address)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "exitGame(string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "delete()void": {
+            "call_config": {
+                "delete_application": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMQpieXRlY2Jsb2NrIDB4NmU3NTZkNTA2YzYxNzk2NTcyNzMgMHg3MjY1Njc2OTczNzQ2NTcyNjU2NCAweDU5IDB4NjM3NTcyNzI2NTZlNzQ1MDZmNzQgMHg2Mzc1NzI3MjY1NmU3NDQ4NmY2YzY0NjU3MiAweDYyNzU3MjZlNTQ2OTZkNjU3Mzc0NjE2ZDcwCnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4NGM1YzYxYmEgLy8gImNyZWF0ZSgpdm9pZCIKPT0KYm56IG1haW5fbDEyCnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4ZDljZjdjYzMgLy8gImVudGVyR2FtZShwYXksc3RyaW5nKXZvaWQiCj09CmJueiBtYWluX2wxMQp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGVhZDMxMWQyIC8vICJ0b3NzUG90YXRvKHN0cmluZyxhZGRyZXNzKXZvaWQiCj09CmJueiBtYWluX2wxMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDdlMTA1NDQ5IC8vICJncmFiUG90YXRvKHN0cmluZyxhZGRyZXNzKXZvaWQiCj09CmJueiBtYWluX2w5CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4M2VlODYyMDcgLy8gImV4aXRHYW1lKHN0cmluZyl2b2lkIgo9PQpibnogbWFpbl9sOAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vICJkZWxldGUoKXZvaWQiCj09CmJueiBtYWluX2w3CmVycgptYWluX2w3Ogp0eG4gT25Db21wbGV0aW9uCnB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBkZWxldGVfNgppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sODoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpjYWxsc3ViIGV4aXRHYW1lXzQKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDk6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CnR4bmEgQXBwbGljYXRpb25BcmdzIDEKc3RvcmUgNAp0eG5hIEFwcGxpY2F0aW9uQXJncyAyCnN0b3JlIDUKbG9hZCA0CmxvYWQgNQpjYWxsc3ViIGdyYWJQb3RhdG9fMwppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sMTA6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CnR4bmEgQXBwbGljYXRpb25BcmdzIDEKc3RvcmUgMgp0eG5hIEFwcGxpY2F0aW9uQXJncyAyCnN0b3JlIDMKbG9hZCAyCmxvYWQgMwpjYWxsc3ViIHRvc3NQb3RhdG9fMgppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sMTE6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CnR4bmEgQXBwbGljYXRpb25BcmdzIDEKc3RvcmUgMQp0eG4gR3JvdXBJbmRleAppbnRjXzEgLy8gMQotCnN0b3JlIDAKbG9hZCAwCmd0eG5zIFR5cGVFbnVtCmludGNfMSAvLyBwYXkKPT0KYXNzZXJ0CmxvYWQgMApsb2FkIDEKY2FsbHN1YiBlbnRlckdhbWVfMQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sMTI6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKPT0KJiYKYXNzZXJ0CmNhbGxzdWIgY3JlYXRlXzAKaW50Y18xIC8vIDEKcmV0dXJuCgovLyBjcmVhdGUKY3JlYXRlXzA6CnByb3RvIDAgMAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGVudGVyR2FtZQplbnRlckdhbWVfMToKcHJvdG8gMiAwCnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAicmVnaXN0ZXJlZCIKYnl0ZWNfMiAvLyAiWSIKYXBwX2xvY2FsX3B1dApmcmFtZV9kaWcgLTIKZ3R4bnMgQW1vdW50CmJ5dGVjXzMgLy8gImN1cnJlbnRQb3QiCmFwcF9nbG9iYWxfZ2V0Cj09CmFzc2VydApmcmFtZV9kaWcgLTIKZ3R4bnMgUmVjZWl2ZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKPT0KYXNzZXJ0CmZyYW1lX2RpZyAtMQphcHBfZ2xvYmFsX2dldApnbG9iYWwgWmVyb0FkZHJlc3MKPT0KLy8gUGxheWVyIHNsb3QgaXMgZW1wdHkKYXNzZXJ0CmJ5dGVjXzAgLy8gIm51bVBsYXllcnMiCmJ5dGVjXzAgLy8gIm51bVBsYXllcnMiCmFwcF9nbG9iYWxfZ2V0CmludGNfMSAvLyAxCisKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyB0b3NzUG90YXRvCnRvc3NQb3RhdG9fMjoKcHJvdG8gMiAwCnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAicmVnaXN0ZXJlZCIKYXBwX2xvY2FsX2dldApieXRlY18yIC8vICJZIgo9PQovLyBBY2NvdW50IGlzIHJlZ2lzdGVyZWQgaW4gdGhlIGdhbWUKYXNzZXJ0Cmdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKYnl0ZWMgNSAvLyAiYnVyblRpbWVzdGFtcCIKYXBwX2dsb2JhbF9nZXQKPj0KYXNzZXJ0CmZyYW1lX2RpZyAtMgphcHBfZ2xvYmFsX2dldApieXRlYyA0IC8vICJjdXJyZW50SG9sZGVyIgphcHBfZ2xvYmFsX2dldAohPQovLyBSZWNpcGllbnQgaXMgcGxheWVyIGluIGdhbWUKYXNzZXJ0CmZyYW1lX2RpZyAtMQp0eG4gU2VuZGVyCiE9Ci8vIFJlY2lwaWVudCBpcyBub3Qgc2VuZGVyCmFzc2VydApieXRlYyA0IC8vICJjdXJyZW50SG9sZGVyIgpmcmFtZV9kaWcgLTEKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBncmFiUG90YXRvCmdyYWJQb3RhdG9fMzoKcHJvdG8gMiAwCnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAicmVnaXN0ZXJlZCIKYXBwX2xvY2FsX2dldApieXRlY18yIC8vICJZIgo9PQovLyBBY2NvdW50IGlzIHJlZ2lzdGVyZWQgaW4gdGhlIGdhbWUKYXNzZXJ0Cmdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKYnl0ZWMgNSAvLyAiYnVyblRpbWVzdGFtcCIKYXBwX2dsb2JhbF9nZXQKPAphc3NlcnQKZnJhbWVfZGlnIC0yCmFwcF9nbG9iYWxfZ2V0CmJ5dGVjIDQgLy8gImN1cnJlbnRIb2xkZXIiCmFwcF9nbG9iYWxfZ2V0CiE9Ci8vIFJlY2lwaWVudCBpcyBwbGF5ZXIgaW4gZ2FtZQphc3NlcnQKZnJhbWVfZGlnIC0xCnR4biBTZW5kZXIKIT0KLy8gUmVjaXBpZW50IGlzIG5vdCBzZW5kZXIKYXNzZXJ0CmJ5dGVjIDQgLy8gImN1cnJlbnRIb2xkZXIiCmZyYW1lX2RpZyAtMQphcHBfZ2xvYmFsX3B1dApieXRlY18zIC8vICJjdXJyZW50UG90IgpieXRlY18zIC8vICJjdXJyZW50UG90IgphcHBfZ2xvYmFsX2dldApieXRlY18wIC8vICJudW1QbGF5ZXJzIgphcHBfZ2xvYmFsX2dldAovCmFwcF9nbG9iYWxfcHV0CnJldHN1YgoKLy8gZXhpdEdhbWUKZXhpdEdhbWVfNDoKcHJvdG8gMSAwCnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAicmVnaXN0ZXJlZCIKYXBwX2xvY2FsX2dldApieXRlY18yIC8vICJZIgo9PQovLyBBY2NvdW50IGlzIHJlZ2lzdGVyZWQgaW4gdGhlIGdhbWUKYXNzZXJ0CnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAicmVnaXN0ZXJlZCIKcHVzaGJ5dGVzIDB4NGUgLy8gIk4iCmFwcF9sb2NhbF9wdXQKZnJhbWVfZGlnIC0xCmFwcF9nbG9iYWxfZ2V0CnR4biBTZW5kZXIKPT0KLy8gQWNjb3VudCBpcyBpbiBwbGF5ZXIgc2xvdAphc3NlcnQKZnJhbWVfZGlnIC0xCnB1c2hpbnQgMzIgLy8gMzIKYnplcm8KYXBwX2dsb2JhbF9wdXQKYnl0ZWNfMCAvLyAibnVtUGxheWVycyIKYnl0ZWNfMCAvLyAibnVtUGxheWVycyIKYXBwX2dsb2JhbF9nZXQKaW50Y18xIC8vIDEKLQphcHBfZ2xvYmFsX3B1dAppdHhuX2JlZ2luCmludGNfMSAvLyBwYXkKaXR4bl9maWVsZCBUeXBlRW51bQpieXRlY18zIC8vICJjdXJyZW50UG90IgphcHBfZ2xvYmFsX2dldAppdHhuX2ZpZWxkIEFtb3VudAp0eG4gU2VuZGVyCml0eG5fZmllbGQgUmVjZWl2ZXIKaW50Y18wIC8vIDAKaXR4bl9maWVsZCBGZWUKcHVzaGJ5dGVzIDB4NTQ2ODYxNmU2YjczMjA2NjZmNzIyMDcwNmM2MTc5Njk2ZTY3MjEgLy8gIlRoYW5rcyBmb3IgcGxheWluZyEiCml0eG5fZmllbGQgTm90ZQppdHhuX3N1Ym1pdApyZXRzdWIKCi8vIGF1dGhfb25seQphdXRob25seV81Ogpwcm90byAxIDEKZnJhbWVfZGlnIC0xCmdsb2JhbCBDcmVhdG9yQWRkcmVzcwo9PQpyZXRzdWIKCi8vIGRlbGV0ZQpkZWxldGVfNjoKcHJvdG8gMCAwCnR4biBTZW5kZXIKY2FsbHN1YiBhdXRob25seV81Ci8vIHVuYXV0aG9yaXplZAphc3NlcnQKYnl0ZWNfMCAvLyAibnVtUGxheWVycyIKYXBwX2dsb2JhbF9nZXQKaW50Y18wIC8vIDAKPT0KLy8gWmVybyBwbGF5ZXJzIGluIGdhbWUKYXNzZXJ0Cml0eG5fYmVnaW4KaW50Y18xIC8vIHBheQppdHhuX2ZpZWxkIFR5cGVFbnVtCmdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCmJhbGFuY2UKaXR4bl9maWVsZCBBbW91bnQKZ2xvYmFsIENyZWF0b3JBZGRyZXNzCml0eG5fZmllbGQgUmVjZWl2ZXIKZ2xvYmFsIENyZWF0b3JBZGRyZXNzCml0eG5fZmllbGQgQ2xvc2VSZW1haW5kZXJUbwppbnRjXzAgLy8gMAppdHhuX2ZpZWxkIEZlZQpwdXNoYnl0ZXMgMHg0NzYxNmQ2NTIwNjM2YzZmNzM2NTY0MjEgLy8gIkdhbWUgY2xvc2VkISIKaXR4bl9maWVsZCBOb3RlCml0eG5fc3VibWl0CnJldHN1Yg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 1,
+            "num_uints": 3
+        },
+        "local": {
+            "num_byte_slices": 1,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "burnTimestamp": {
+                    "type": "uint64",
+                    "key": "burnTimestamp",
+                    "descr": ""
+                },
+                "currentHolder": {
+                    "type": "bytes",
+                    "key": "currentHolder",
+                    "descr": ""
+                },
+                "currentPot": {
+                    "type": "uint64",
+                    "key": "currentPot",
+                    "descr": ""
+                },
+                "numPlayers": {
+                    "type": "uint64",
+                    "key": "numPlayers",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "registered": {
+                    "type": "bytes",
+                    "key": "registered",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "HotPotato",
+        "methods": [
+            {
+                "name": "create",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "enterGame",
+                "args": [
+                    {
+                        "type": "pay",
+                        "name": "payment"
+                    },
+                    {
+                        "type": "string",
+                        "name": "player"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "tossPotato",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "player"
+                    },
+                    {
+                        "type": "address",
+                        "name": "recipient"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "grabPotato",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "player"
+                    },
+                    {
+                        "type": "address",
+                        "name": "recipient"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "exitGame",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "player"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "delete",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {}
+}

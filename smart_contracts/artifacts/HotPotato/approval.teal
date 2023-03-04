@@ -1,0 +1,318 @@
+#pragma version 8
+intcblock 0 1
+bytecblock 0x6e756d506c6179657273 0x72656769737465726564 0x59 0x63757272656e74506f74 0x63757272656e74486f6c646572 0x6275726e54696d657374616d70
+txna ApplicationArgs 0
+pushbytes 0x4c5c61ba // "create()void"
+==
+bnz main_l12
+txna ApplicationArgs 0
+pushbytes 0xd9cf7cc3 // "enterGame(pay,string)void"
+==
+bnz main_l11
+txna ApplicationArgs 0
+pushbytes 0xead311d2 // "tossPotato(string,address)void"
+==
+bnz main_l10
+txna ApplicationArgs 0
+pushbytes 0x7e105449 // "grabPotato(string,address)void"
+==
+bnz main_l9
+txna ApplicationArgs 0
+pushbytes 0x3ee86207 // "exitGame(string)void"
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0x24378d3c // "delete()void"
+==
+bnz main_l7
+err
+main_l7:
+txn OnCompletion
+pushint 5 // DeleteApplication
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub delete_6
+intc_1 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+callsub exitGame_4
+intc_1 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 4
+txna ApplicationArgs 2
+store 5
+load 4
+load 5
+callsub grabPotato_3
+intc_1 // 1
+return
+main_l10:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 2
+txna ApplicationArgs 2
+store 3
+load 2
+load 3
+callsub tossPotato_2
+intc_1 // 1
+return
+main_l11:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 1
+txn GroupIndex
+intc_1 // 1
+-
+store 0
+load 0
+gtxns TypeEnum
+intc_1 // pay
+==
+assert
+load 0
+load 1
+callsub enterGame_1
+intc_1 // 1
+return
+main_l12:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+==
+&&
+assert
+callsub create_0
+intc_1 // 1
+return
+
+// create
+create_0:
+proto 0 0
+intc_1 // 1
+return
+
+// enterGame
+enterGame_1:
+proto 2 0
+txn Sender
+bytec_1 // "registered"
+bytec_2 // "Y"
+app_local_put
+frame_dig -2
+gtxns Amount
+bytec_3 // "currentPot"
+app_global_get
+==
+assert
+frame_dig -2
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+frame_dig -1
+app_global_get
+global ZeroAddress
+==
+// Player slot is empty
+assert
+bytec_0 // "numPlayers"
+bytec_0 // "numPlayers"
+app_global_get
+intc_1 // 1
++
+app_global_put
+retsub
+
+// tossPotato
+tossPotato_2:
+proto 2 0
+txn Sender
+bytec_1 // "registered"
+app_local_get
+bytec_2 // "Y"
+==
+// Account is registered in the game
+assert
+global LatestTimestamp
+bytec 5 // "burnTimestamp"
+app_global_get
+>=
+assert
+frame_dig -2
+app_global_get
+bytec 4 // "currentHolder"
+app_global_get
+!=
+// Recipient is player in game
+assert
+frame_dig -1
+txn Sender
+!=
+// Recipient is not sender
+assert
+bytec 4 // "currentHolder"
+frame_dig -1
+app_global_put
+retsub
+
+// grabPotato
+grabPotato_3:
+proto 2 0
+txn Sender
+bytec_1 // "registered"
+app_local_get
+bytec_2 // "Y"
+==
+// Account is registered in the game
+assert
+global LatestTimestamp
+bytec 5 // "burnTimestamp"
+app_global_get
+<
+assert
+frame_dig -2
+app_global_get
+bytec 4 // "currentHolder"
+app_global_get
+!=
+// Recipient is player in game
+assert
+frame_dig -1
+txn Sender
+!=
+// Recipient is not sender
+assert
+bytec 4 // "currentHolder"
+frame_dig -1
+app_global_put
+bytec_3 // "currentPot"
+bytec_3 // "currentPot"
+app_global_get
+bytec_0 // "numPlayers"
+app_global_get
+/
+app_global_put
+retsub
+
+// exitGame
+exitGame_4:
+proto 1 0
+txn Sender
+bytec_1 // "registered"
+app_local_get
+bytec_2 // "Y"
+==
+// Account is registered in the game
+assert
+txn Sender
+bytec_1 // "registered"
+pushbytes 0x4e // "N"
+app_local_put
+frame_dig -1
+app_global_get
+txn Sender
+==
+// Account is in player slot
+assert
+frame_dig -1
+pushint 32 // 32
+bzero
+app_global_put
+bytec_0 // "numPlayers"
+bytec_0 // "numPlayers"
+app_global_get
+intc_1 // 1
+-
+app_global_put
+itxn_begin
+intc_1 // pay
+itxn_field TypeEnum
+bytec_3 // "currentPot"
+app_global_get
+itxn_field Amount
+txn Sender
+itxn_field Receiver
+intc_0 // 0
+itxn_field Fee
+pushbytes 0x5468616e6b7320666f7220706c6179696e6721 // "Thanks for playing!"
+itxn_field Note
+itxn_submit
+retsub
+
+// auth_only
+authonly_5:
+proto 1 1
+frame_dig -1
+global CreatorAddress
+==
+retsub
+
+// delete
+delete_6:
+proto 0 0
+txn Sender
+callsub authonly_5
+// unauthorized
+assert
+bytec_0 // "numPlayers"
+app_global_get
+intc_0 // 0
+==
+// Zero players in game
+assert
+itxn_begin
+intc_1 // pay
+itxn_field TypeEnum
+global CurrentApplicationAddress
+balance
+itxn_field Amount
+global CreatorAddress
+itxn_field Receiver
+global CreatorAddress
+itxn_field CloseRemainderTo
+intc_0 // 0
+itxn_field Fee
+pushbytes 0x47616d6520636c6f73656421 // "Game closed!"
+itxn_field Note
+itxn_submit
+retsub

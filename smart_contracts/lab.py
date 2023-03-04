@@ -4,7 +4,7 @@ from shutil import rmtree
 
 from beaker import Application
 
-from smart_contracts.helloworld import app as hello_world_app
+from smart_contracts.hotpotato import app as hot_potato_app
 
 
 class Lab:
@@ -24,5 +24,5 @@ class Lab:
 
 
 my_lab = Lab(
-    apps=[hello_world_app],
+    apps=[hot_potato_app],
 )

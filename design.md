@@ -17,11 +17,12 @@
 
 ### State
 
-1. numPlayers
-2. potAmount
-3. player1account  
+1. potAmount
+2. burnTimestamp
+3. numPlayers
+4. player1account  
    ...
-4. player60account
+5. player60account
 
 ### Contract Methods
 
