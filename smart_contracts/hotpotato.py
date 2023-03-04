@@ -38,7 +38,8 @@ def tossPotato(player: abi.String, recipient: abi.Address) -> Expr:
         Assert(Global.latest_timestamp() >= app.state.burnTimestamp.get()),
         Assert(App.globalGet(player.encode()) != app.state.currentHolder.get(), comment="Recipient is player in game"),
         Assert(recipient.get() != Txn.sender(), comment="Recipient is not sender"),
-        app.state.currentHolder.set(recipient.get())
+        app.state.currentHolder.set(recipient.get()),
+        app.state.burnTimestamp.set(app.state.burnTimestamp.get() + Int(60_000))
     )
 
 @app.external
@@ -49,7 +50,8 @@ def grabPotato(player: abi.String, recipient: abi.Address) -> Expr:
         Assert(App.globalGet(player.encode()) != app.state.currentHolder.get(), comment="Recipient is player in game"),
         Assert(recipient.get() != Txn.sender(), comment="Recipient is not sender"),
         app.state.currentHolder.set(recipient.get()),
-        app.state.currentPot.set(Div(app.state.currentPot.get(),app.state.numPlayers.get()))
+        app.state.currentPot.set(Div(app.state.currentPot.get(),app.state.numPlayers.get())),
+        app.state.burnTimestamp.set(app.state.burnTimestamp.get() + Int(60_000))
     )
 
 @app.external
