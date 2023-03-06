@@ -29,10 +29,10 @@
             "args": [
                 {
                     "type": "string",
-                    "name": "player"
+                    "name": "player_slot"
                 },
                 {
-                    "type": "address",
+                    "type": "account",
                     "name": "recipient"
                 }
             ],
@@ -48,7 +48,7 @@
                     "name": "player"
                 },
                 {
-                    "type": "address",
+                    "type": "account",
                     "name": "recipient"
                 }
             ],

@@ -1,6 +1,6 @@
 #pragma version 8
-intcblock 0 1
-bytecblock 0x6e756d506c6179657273 0x72656769737465726564 0x59 0x63757272656e74506f74 0x63757272656e74486f6c646572 0x6275726e54696d657374616d70
+intcblock 0 1 8 4 100000
+bytecblock 0x63757272656e745f686f6c646572 0x72656769737465726564 0x6e756d5f706c6179657273 0x706f7461746f 0x59 0x63757272656e745f706f74 0x6275726e5f74696d657374616d70 0x5370756420746f73736564207375636365737366756c6c7921 0x72616e646f6d6e6573735f726f756e64
 txna ApplicationArgs 0
 pushbytes 0x4c5c61ba // "create()void"
 ==
@@ -10,11 +10,11 @@ pushbytes 0xd9cf7cc3 // "enterGame(pay,string)void"
 ==
 bnz main_l11
 txna ApplicationArgs 0
-pushbytes 0xead311d2 // "tossPotato(string,address)void"
+pushbytes 0x3b1b7549 // "tossPotato(string,account)void"
 ==
 bnz main_l10
 txna ApplicationArgs 0
-pushbytes 0x7e105449 // "grabPotato(string,address)void"
+pushbytes 0x368d7b2b // "grabPotato(string,account)void"
 ==
 bnz main_l9
 txna ApplicationArgs 0
@@ -63,6 +63,8 @@ assert
 txna ApplicationArgs 1
 store 4
 txna ApplicationArgs 2
+intc_0 // 0
+getbyte
 store 5
 load 4
 load 5
@@ -81,6 +83,8 @@ assert
 txna ApplicationArgs 1
 store 2
 txna ApplicationArgs 2
+intc_0 // 0
+getbyte
 store 3
 load 2
 load 3
@@ -128,19 +132,41 @@ return
 // create
 create_0:
 proto 0 0
+itxn_begin
+pushint 3 // acfg
+itxn_field TypeEnum
 intc_1 // 1
-return
+itxn_field ConfigAssetTotal
+global CurrentApplicationAddress
+itxn_field ConfigAssetClawback
+intc_0 // 0
+itxn_field ConfigAssetDecimals
+intc_1 // 1
+itxn_field ConfigAssetDefaultFrozen
+global CurrentApplicationAddress
+itxn_field ConfigAssetFreeze
+global CurrentApplicationAddress
+itxn_field ConfigAssetManager
+global CurrentApplicationAddress
+itxn_field ConfigAssetReserve
+intc_0 // 0
+itxn_field Fee
+itxn_submit
+bytec_3 // "potato"
+itxn CreatedAssetID
+app_global_put
+retsub
 
 // enterGame
 enterGame_1:
 proto 2 0
 txn Sender
 bytec_1 // "registered"
-bytec_2 // "Y"
+bytec 4 // "Y"
 app_local_put
 frame_dig -2
 gtxns Amount
-bytec_3 // "currentPot"
+bytec 5 // "current_pot"
 app_global_get
 ==
 assert
@@ -155,8 +181,8 @@ global ZeroAddress
 ==
 // Player slot is empty
 assert
-bytec_0 // "numPlayers"
-bytec_0 // "numPlayers"
+bytec_2 // "num_players"
+bytec_2 // "num_players"
 app_global_get
 intc_1 // 1
 +
@@ -166,69 +192,165 @@ retsub
 // tossPotato
 tossPotato_2:
 proto 2 0
+global LatestTimestamp
+bytec 6 // "burn_timestamp"
+app_global_get
+<=
+// Before burn time
+assert
+txn Sender
+bytec_0 // "current_holder"
+app_global_get
+==
+// Sender is current holder
+assert
+txn Sender
+bytec_3 // "potato"
+app_global_get
+asset_holding_get AssetBalance
+store 7
+store 6
+load 7
+// Current holder has potato
+assert
 txn Sender
 bytec_1 // "registered"
 app_local_get
-bytec_2 // "Y"
+bytec 4 // "Y"
 ==
 // Account is registered in the game
 assert
-global LatestTimestamp
-bytec 5 // "burnTimestamp"
-app_global_get
->=
-assert
 frame_dig -2
 app_global_get
-bytec 4 // "currentHolder"
+bytec_0 // "current_holder"
 app_global_get
 !=
-// Recipient is player in game
+// Recipient is another player
 assert
 frame_dig -1
+txnas Accounts
 txn Sender
 !=
 // Recipient is not sender
 assert
-bytec 4 // "currentHolder"
+itxn_begin
+intc_3 // axfer
+itxn_field TypeEnum
+bytec_3 // "potato"
+app_global_get
+itxn_field XferAsset
+intc_1 // 1
+itxn_field AssetAmount
+txn Sender
+itxn_field AssetSender
 frame_dig -1
+txnas Accounts
+itxn_field AssetReceiver
+intc_0 // 0
+itxn_field Fee
+bytec 7 // "Spud tossed successfully!"
+itxn_field Note
+itxn_submit
+bytec_0 // "current_holder"
+frame_dig -1
+txnas Accounts
+app_global_put
+bytec 6 // "burn_timestamp"
+global LatestTimestamp
+intc 4 // 100000
++
+app_global_put
+bytec 8 // "randomness_round"
+global Round
+intc_2 // 8
++
+global Round
+intc_2 // 8
+%
+-
 app_global_put
 retsub
 
 // grabPotato
 grabPotato_3:
 proto 2 0
+global LatestTimestamp
+bytec 6 // "burn_timestamp"
+app_global_get
+>
+// After burn time
+assert
 txn Sender
 bytec_1 // "registered"
 app_local_get
-bytec_2 // "Y"
+bytec 4 // "Y"
 ==
 // Account is registered in the game
 assert
-global LatestTimestamp
-bytec 5 // "burnTimestamp"
+txn Sender
+bytec_0 // "current_holder"
 app_global_get
-<
+!=
+// Sender is not current holder
 assert
 frame_dig -2
 app_global_get
-bytec 4 // "currentHolder"
+bytec_0 // "current_holder"
 app_global_get
 !=
-// Recipient is player in game
+// Recipient is another player
 assert
 frame_dig -1
+txnas Accounts
 txn Sender
 !=
 // Recipient is not sender
 assert
-bytec 4 // "currentHolder"
-frame_dig -1
-app_global_put
-bytec_3 // "currentPot"
-bytec_3 // "currentPot"
+bytec_0 // "current_holder"
 app_global_get
-bytec_0 // "numPlayers"
+bytec_1 // "registered"
+app_local_del
+itxn_begin
+intc_3 // axfer
+itxn_field TypeEnum
+bytec_3 // "potato"
+app_global_get
+itxn_field XferAsset
+intc_1 // 1
+itxn_field AssetAmount
+bytec_0 // "current_holder"
+app_global_get
+itxn_field AssetSender
+frame_dig -1
+txnas Accounts
+itxn_field AssetReceiver
+intc_0 // 0
+itxn_field Fee
+bytec 7 // "Spud tossed successfully!"
+itxn_field Note
+itxn_submit
+bytec_0 // "current_holder"
+frame_dig -1
+txnas Accounts
+app_global_put
+bytec 6 // "burn_timestamp"
+global LatestTimestamp
+intc 4 // 100000
++
+app_global_put
+bytec 8 // "randomness_round"
+global Round
+intc_2 // 8
++
+global Round
+intc_2 // 8
+%
+-
+app_global_put
+bytec 5 // "current_pot"
+bytec 5 // "current_pot"
+app_global_get
+bytec_2 // "num_players"
 app_global_get
 /
 app_global_put
@@ -240,7 +362,7 @@ proto 1 0
 txn Sender
 bytec_1 // "registered"
 app_local_get
-bytec_2 // "Y"
+bytec 4 // "Y"
 ==
 // Account is registered in the game
 assert
@@ -258,8 +380,8 @@ frame_dig -1
 pushint 32 // 32
 bzero
 app_global_put
-bytec_0 // "numPlayers"
-bytec_0 // "numPlayers"
+bytec_2 // "num_players"
+bytec_2 // "num_players"
 app_global_get
 intc_1 // 1
 -
@@ -267,7 +389,7 @@ app_global_put
 itxn_begin
 intc_1 // pay
 itxn_field TypeEnum
-bytec_3 // "currentPot"
+bytec 5 // "current_pot"
 app_global_get
 itxn_field Amount
 txn Sender
@@ -294,7 +416,7 @@ txn Sender
 callsub authonly_5
 // unauthorized
 assert
-bytec_0 // "numPlayers"
+bytec_2 // "num_players"
 app_global_get
 intc_0 // 0
 ==
