@@ -69,6 +69,7 @@ def enterGame(payment: abi.PaymentTransaction, player: abi.String) -> Expr:
         Assert(payment.get().amount() == app.state.current_pot.get()),
         Assert(payment.get().receiver() == Global.current_application_address()),
         Assert(App.globalGet(player.encode()) == Global.zero_address(), comment="Player slot is empty"),
+        Assert(app.state.num_players.get() < Int(49), comment="Less than 49 players"),
         app.state.num_players.set(app.state.num_players.get() + Int(1))
     )
 

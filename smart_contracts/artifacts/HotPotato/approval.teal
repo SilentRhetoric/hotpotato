@@ -182,6 +182,12 @@ global ZeroAddress
 // Player slot is empty
 assert
 bytec_2 // "num_players"
+app_global_get
+pushint 49 // 49
+<
+// Less than 49 players
+assert
+bytec_2 // "num_players"
 bytec_2 // "num_players"
 app_global_get
 intc_1 // 1
@@ -350,8 +356,7 @@ app_global_put
 bytec 5 // "current_pot"
 bytec 5 // "current_pot"
 app_global_get
-bytec_2 // "num_players"
-app_global_get
+pushint 50 // 50
 /
 app_global_put
 retsub
